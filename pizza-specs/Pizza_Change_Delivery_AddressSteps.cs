@@ -1,4 +1,5 @@
-﻿using pizza;
+﻿using NUnit.Framework;
+using pizza;
 using TechTalk.SpecFlow;
 
 namespace pizza_specs
@@ -10,6 +11,7 @@ namespace pizza_specs
         private Order _order;
         private readonly AddressFactory _addressFactory;
         private readonly CustomerFactory _customerFactory;
+        private ChangeDeliveryAddressResult _result;
 
         public PizzaChangeDeliveryAddressSteps(
             PizzaService pizzaService, 
@@ -45,19 +47,23 @@ namespace pizza_specs
         [When(@"the customer wants to change the delivery address to ""(.*)""")]
         public void WhenTheCustomerWantsToChangeTheDeliveryAddressTo(string addressLabel)
         {
-            ScenarioContext.Current.Pending();
+            Address address = _addressFactory.Get(addressLabel);
+            _result = _pizzaService.ChangeDeliveryAddress(_order, address);
         }
 
         [Then(@"the system should accept the change")]
         public void ThenTheSystemShouldAcceptTheChange()
         {
-            ScenarioContext.Current.Pending();
+            Assert.IsInstanceOf<DeliveryAddressChangeAccepted>(_result);
         }
 
         [Then(@"the system should deny the change with message ""(.*)""")]
         public void ThenTheSystemShouldDenyTheChangeWithMessage(string message)
         {
-            ScenarioContext.Current.Pending();
+            Assert.IsInstanceOf<DeliveryAddressChangeDenied>(_result);
+
+            var deliveryAddressChangeDenied = (DeliveryAddressChangeDenied) _result;
+            Assert.AreEqual(message, deliveryAddressChangeDenied.Message);
         }
     }
 }

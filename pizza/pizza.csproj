@@ -42,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="ChangeDeliveryAddressResult.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="DeliveryAddressChangeAccepted.cs" />
+    <Compile Include="DeliveryAddressChangeDenied.cs" />
     <Compile Include="DeliveryState.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Pizza.cs" />
