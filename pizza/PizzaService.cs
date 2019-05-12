@@ -31,6 +31,23 @@
         {
             order.DeliveryState = DeliveryState.Delivered;
         }
+
+        public ChangeDeliveryAddressResult ChangeDeliveryAddress(Order order, Address address)
+        {
+            if (IsAlreadyPickedUp(order))
+            {
+                return new ChangeDeliveryAddressResult(ChangeDeliveryAddressResultType.Denied, "Already picked up");
+            }
+
+            order.DeliveryAddress = address;
+
+            return new ChangeDeliveryAddressResult(ChangeDeliveryAddressResultType.Changed);
+        }
+
+        private static bool IsAlreadyPickedUp(Order order)
+        {
+            return order.DeliveryState == DeliveryState.OnDelivery || order.DeliveryState == DeliveryState.Delivered;
+        }
     }
 }
 

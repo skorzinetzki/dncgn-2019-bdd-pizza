@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="ChangeDeliveryAddressResult.cs" />
+    <Compile Include="ChangeDeliveryAddressResultType.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="DeliveryState.cs" />
     <Compile Include="Order.cs" />
